@@ -25,28 +25,7 @@ extension Array where Element: Comparable {
         let lhs = Array(self[0..<middle])
         let rhs = Array(self[middle..<count])
         
-        return recursiveMergeSort(lhs, rhs)
-    }
-    
-    private func recursiveMergeSort(_ lhs: [Element], _ rhs: [Element]) -> [Element] {
-        
-        // Atomic case
-        guard lhs.count > 1 && rhs.count > 1 else {
-            return mergeSortCombine(lhs.sorted(), rhs.sorted())
-        }
-        
-        // TODO: Do not create new arrays big O space
-        let lhsMiddle = lhs.count / 2
-        let lhsLow  = Array(lhs[0..<lhsMiddle])
-        let lhsHigh = Array(lhs[lhsMiddle..<lhs.count])
-        let lhsResult = recursiveMergeSort(lhsLow, lhsHigh)
-        
-        let rhsMiddle = rhs.count / 2
-        let rhsLow  = Array(rhs[0..<rhsMiddle])
-        let rhsHigh = Array(rhs[rhsMiddle..<rhs.count])
-        let rhsResult = recursiveMergeSort(rhsLow, rhsHigh)
-
-        return mergeSortCombine(lhsResult, rhsResult)
+        return mergeSortCombine(lhs.mergeSort(), rhs.mergeSort())
     }
     
     private func mergeSortCombine(_ lhs: [Element], _ rhs: [Element]) -> [Element] {
@@ -85,8 +64,8 @@ extension Array where Element: Comparable {
 [1].mergeSort()
 [2,1].mergeSort()
 [100,1,3].mergeSort()
-print("Result   : \([8,7,2,5,8,9,1,0,6,9,3,4].mergeSort())")
-print("Result   : \([6,33,10,37,11,46,44,25,19,44,17,45,15,4,45,32,34,8,10,17,31,0].mergeSort())")
+print("\([8,7,2,5,8,9,1,0,6,9,3,4].mergeSort())")
+print("\([6,33,10,37,11,46,44,25,19,44,17,45,15,4,45,32,34,8,10,17,31,0].mergeSort())")
 
 
 let person1 = Person(age: 20, name: "Sam")
